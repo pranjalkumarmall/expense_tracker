@@ -1,10 +1,9 @@
-// Import necessary modules
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 /**
- * Handles user registration.
+ * Register a new user
  */
 export const register = async (req, res) => {
     try {
@@ -49,7 +48,7 @@ export const register = async (req, res) => {
 };
 
 /**
- * Handles user login.
+ * Login an existing user
  */
 export const login = async (req, res) => {
     try {
@@ -79,24 +78,27 @@ export const login = async (req, res) => {
             });
         }
 
-        const tokenData = { userId: user._id };
+        const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+            expiresIn: "1d"
+        });
 
-        const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
-
-        return res.status(200)
+        // ✅ IMPORTANT: For Render or any cross-origin, must add: secure: true, sameSite: "None"
+        return res
+            .status(200)
             .cookie("token", token, {
-                maxAge: 24 * 60 * 60 * 1000, // 1 day
                 httpOnly: true,
-                sameSite: 'strict'
+                secure: true,           // Required for HTTPS
+                sameSite: "None",       // Allow cross-site cookie
+                maxAge: 24 * 60 * 60 * 1000 // 1 day
             })
             .json({
                 message: `Welcome back ${user.fullname}`,
+                success: true,
                 user: {
                     _id: user._id,
                     fullname: user.fullname,
                     email: user.email
-                },
-                success: true
+                }
             });
 
     } catch (error) {
@@ -110,12 +112,18 @@ export const login = async (req, res) => {
 };
 
 /**
- * Handles user logout.
+ * Logout the user
  */
 export const logout = async (req, res) => {
     try {
-        return res.status(200)
-            .cookie("token", "", { maxAge: 0 })
+        return res
+            .status(200)
+            .cookie("token", "", {
+                httpOnly: true,
+                secure: true,      // Also required here for consistency
+                sameSite: "None",
+                maxAge: 0
+            })
             .json({
                 message: "User logged out successfully.",
                 success: true
@@ -129,3 +137,4 @@ export const logout = async (req, res) => {
         });
     }
 };
+
