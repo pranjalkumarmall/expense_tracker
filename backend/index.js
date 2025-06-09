@@ -1,4 +1,4 @@
-import express, { urlencoded } from "express";
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -13,13 +13,19 @@ const port = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // ✅ CORS Setup
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://your-frontend-domain.vercel.app",  // ← Replace this with your actual frontend domain
+    "https://expense-tracker-frontend.netlify.app" // (example)
+];
+
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || origin === "http://localhost:5173") {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error("Not allowed by CORS"));
@@ -35,5 +41,5 @@ app.use("/api/v1/expense", expenseRoute);
 // Start server
 app.listen(port, () => {
     connectDB();
-    console.log(`Server listening at http://localhost:${port}`);
+    console.log(`✅ Server live at: https://expense-tracker-1qkr.onrender.com`);
 });
