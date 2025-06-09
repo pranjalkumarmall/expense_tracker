@@ -13,7 +13,7 @@ const Navbar = () => {
      const navigate = useNavigate();
     const logoutHandler=async()=>{
         try{
-            const res=await axios.get("http://localhost:5000/api/v1/user/logout");
+            const res=await axios.get("https://expense-tracker-1qkr.onrender.com/api/v1/user/logout");
             if(res.data.success){
                 navigate("./login");
                 toast.success(res.data.message);
