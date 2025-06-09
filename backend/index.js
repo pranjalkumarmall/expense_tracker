@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 // ✅ CORS Setup
 const allowedOrigins = [
-      "http://localhost:5173",
+     // "http://localhost:5173",
     "https://your-frontend-domain.onrender.com" 
 ];
 
