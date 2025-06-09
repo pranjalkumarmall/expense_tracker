@@ -51,7 +51,7 @@ const UpdateExpense = ({ expense }) => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `http://localhost:5000/api/v1/expense/update/${expense._id}`,
+        `https://expense-tracker-1qkr.onrender.com/api/v1/expense/update/${expense._id}`,
         formData,
         {
           headers: { "Content-Type": "application/json" },
