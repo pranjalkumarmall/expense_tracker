@@ -18,9 +18,8 @@ app.use(cookieParser());
 
 // ✅ CORS Setup
 const allowedOrigins = [
-    "http://localhost:5173",
-    "https://your-frontend-domain.vercel.app",  // ← Replace this with your actual frontend domain
-    "https://expense-tracker-frontend.netlify.app" // (example)
+      "http://localhost:5173",
+    "https://your-frontend-domain.onrender.com" 
 ];
 
 app.use(cors({
