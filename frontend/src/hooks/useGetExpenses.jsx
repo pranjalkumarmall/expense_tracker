@@ -12,7 +12,7 @@ const useGetExpenses=()=>{
         const fetchExpense=async()=>{
             try{
                 axios.defaults.withCredentials=true;
-            const res=  await  axios.get(`http://localhost:5000/api/v1/expense/getall?category=${category}&done=${markAsDone}`
+            const res=  await  axios.get(`https://expense-tracker-1qkr.onrender.com/api/v1/expense/getall?category=${category}&done=${markAsDone}`
 );
               if(res.data.success){
                 dispatch(setExpenses(res.data.expense));
