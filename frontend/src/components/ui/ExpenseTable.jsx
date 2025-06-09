@@ -39,7 +39,7 @@ const ExpenseTable = () => {
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/v1/expense/${expenseId}/done`,
+        `https://expense-tracker-1qkr.onrender.com/api/v1/expense/${expenseId}/done`,
         { done: newStatus },
         {
           headers: {
@@ -71,7 +71,7 @@ const ExpenseTable = () => {
     const removeExpenseHandler = async (expenseId) => {
     try {
       const res = await axios.delete(
-       `http://localhost:5000/api/v1/expense/remove/${expenseId}`,
+       `https://expense-tracker-1qkr.onrender.com/api/v1/expense/remove/${expenseId}`,
         {
           withCredentials: true,
         }
