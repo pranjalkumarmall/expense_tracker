@@ -25,7 +25,7 @@ const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/api/v1/user/login", input, {
+            const res = await axios.post("https://expense-tracker-1qkr.onrender.com/api/v1/user/login", input, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
