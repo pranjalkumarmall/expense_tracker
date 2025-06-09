@@ -24,7 +24,7 @@ const Signup= () =>{
            e.preventDefault(); // ✅ Correct spelling
           e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/api/v1/user/register", input, {
+            const res = await axios.post("https://expense-tracker-1qkr.onrender.com/api/v1/user/register", input, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
